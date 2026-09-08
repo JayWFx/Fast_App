@@ -3,6 +3,6 @@ module org.example.fast_app {
     requires javafx.fxml;
 
 
-    opens org.example.fast_app to javafx.fxml;
+    opens org.example.fast_app.controller to javafx.fxml;
     exports org.example.fast_app;
 }
