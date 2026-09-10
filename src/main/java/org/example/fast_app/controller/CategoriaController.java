@@ -1,16 +1,14 @@
 package org.example.fast_app.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.fast_app.model.Categoria;
+import org.example.fast_app.util.DatosManager;
 
 public class CategoriaController {
 
-    @FXML private TextField txtId;
     @FXML private TextField txtNombre;
     @FXML private CheckBox chkActiva;
     @FXML private TableView<Categoria> tblCategorias;
@@ -18,8 +16,7 @@ public class CategoriaController {
     @FXML private TableColumn<Categoria, String> colNombre;
     @FXML private TableColumn<Categoria, Boolean> colActiva;
 
-    private final ObservableList<Categoria> listaCategorias = FXCollections.observableArrayList();
-    private int contadorId = 4;
+    private int contadorId = 1;
 
     @FXML
     private void initialize() {
@@ -27,7 +24,7 @@ public class CategoriaController {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colActiva.setCellValueFactory(new PropertyValueFactory<>("activa"));
 
-        tblCategorias.setItems(listaCategorias);
+        tblCategorias.setItems(DatosManager.getInstance().getCategorias());
         chkActiva.setSelected(true);
     }
 
@@ -44,7 +41,7 @@ public class CategoriaController {
                 chkActiva.isSelected()
         );
 
-        listaCategorias.add(cat);
+        DatosManager.getInstance().getCategorias().add(cat);
         mostrarAlerta(Alert.AlertType.INFORMATION, "Categoría agregada exitosamente.");
         limpiar();
     }

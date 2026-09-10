@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.example.fast_app.model.DetalleFactura;
 import org.example.fast_app.model.Factura;
 import org.example.fast_app.model.Producto;
+import org.example.fast_app.util.DatosManager;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -54,8 +55,8 @@ public class FacturaController {
 
         tblDetalles.setItems(detalles);
 
-        // Sin datos de ejemplo: la lista inicia vacía
-        cmbProducto.setItems(FXCollections.observableArrayList());
+        // Enlazar combo de productos con la lista creada por el usuario
+        cmbProducto.setItems(DatosManager.getInstance().getProductos());
 
         cmbProducto.setOnAction(e -> {
             Producto p = cmbProducto.getValue();
@@ -71,7 +72,7 @@ public class FacturaController {
     private void agregarDetalle() {
         Producto p = cmbProducto.getValue();
         if (p == null) {
-            mensaje(Alert.AlertType.WARNING, "Seleccione un producto.");
+            mensaje(Alert.AlertType.WARNING, "Seleccione un producto de la lista (debe agregarlo en el módulo de Productos primero).");
             return;
         }
 
@@ -131,6 +132,8 @@ public class FacturaController {
         facturaActual.setNumeroFactura(txtNumFactura.getText());
         facturaActual.setCliente(txtCliente.getText().trim());
         facturaActual.setNit(txtNit.getText().trim());
+
+        DatosManager.getInstance().getFacturas().add(facturaActual);
 
         mensaje(Alert.AlertType.INFORMATION, "Factura " + facturaActual.getNumeroFactura() + " emitida exitosamente por un total de " + String.format("$%.2f", facturaActual.getTotal()));
 

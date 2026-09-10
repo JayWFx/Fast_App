@@ -1,13 +1,12 @@
 package org.example.fast_app.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.fast_app.model.Cargo;
 import org.example.fast_app.model.Empleado;
+import org.example.fast_app.util.DatosManager;
 
 import java.time.LocalDate;
 
@@ -27,8 +26,7 @@ public class EmpleadoController {
     @FXML private TableColumn<Empleado, LocalDate> colFechaContratacion;
     @FXML private TableColumn<Empleado, Boolean> colActivo;
 
-    private final ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
-    private int contadorId = 3;
+    private int contadorId = 1;
 
     @FXML
     private void initialize() {
@@ -39,15 +37,15 @@ public class EmpleadoController {
         colFechaContratacion.setCellValueFactory(new PropertyValueFactory<>("fechaContratacion"));
         colActivo.setCellValueFactory(new PropertyValueFactory<>("activo"));
 
-        cmbCargo.setItems(FXCollections.observableArrayList());
-        tblEmpleados.setItems(listaEmpleados);
+        cmbCargo.setItems(DatosManager.getInstance().getCargos());
+        tblEmpleados.setItems(DatosManager.getInstance().getEmpleados());
         chkActivo.setSelected(true);
         dtpFechaContratacion.setValue(LocalDate.now());
     }
 
     @FXML
     private void guardar() {
-        if (txtNombres.getText().isBlank() || txtApellidos.getText().isBlank() || cmbCargo.getValue() == null) {
+        if (txtNombres.getText().isBlank() || txtApellidos.getText().isBlank()) {
             mostrarAlerta(Alert.AlertType.WARNING, "Complete los campos obligatorios.");
             return;
         }
@@ -61,7 +59,7 @@ public class EmpleadoController {
                 chkActivo.isSelected()
         );
 
-        listaEmpleados.add(emp);
+        DatosManager.getInstance().getEmpleados().add(emp);
         mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado registrado correctamente.");
         limpiar();
     }

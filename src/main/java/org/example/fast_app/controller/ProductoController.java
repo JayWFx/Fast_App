@@ -3,8 +3,6 @@ package org.example.fast_app.controller;
 import java.io.File;
 import java.math.BigDecimal;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,6 +13,7 @@ import javafx.stage.Stage;
 
 import org.example.fast_app.model.Categoria;
 import org.example.fast_app.model.Producto;
+import org.example.fast_app.util.DatosManager;
 
 public class ProductoController {
 
@@ -31,7 +30,6 @@ public class ProductoController {
     @FXML private TableColumn<Producto, Integer> colExistencia;
     @FXML private TableColumn<Producto, Boolean> colActivo;
 
-    private final ObservableList<Producto> productos = FXCollections.observableArrayList();
     private String rutaImagen;
 
     @FXML
@@ -44,14 +42,12 @@ public class ProductoController {
         colExistencia.setCellValueFactory(new PropertyValueFactory<>("existencia"));
         colActivo.setCellValueFactory(new PropertyValueFactory<>("activo"));
 
-        // Carga de categorías en el ComboBox
-        cmbCategoria.setItems(FXCollections.observableArrayList());
-
-        tblProductos.setItems(productos);
+        // Enlazar con el Gestor de Datos compartido
+        cmbCategoria.setItems(DatosManager.getInstance().getCategorias());
+        tblProductos.setItems(DatosManager.getInstance().getProductos());
         chkActivo.setSelected(true);
     }
 
-    // Caso 6: Seleccionar imagen y mostrarla en ImageView
     @FXML
     private void seleccionarImagen() {
         FileChooser chooser = new FileChooser();
@@ -67,11 +63,15 @@ public class ProductoController {
 
     @FXML
     private void guardar() {
-        // Validación de campos vacíos
+        if (cmbCategoria.getItems().isEmpty()) {
+            mensaje(Alert.AlertType.WARNING, "Primero debe ingresar al menos una categoría en el módulo de Categorías.");
+            return;
+        }
+
         if (txtCodigo.getText().isBlank() || txtNombre.getText().isBlank()
                 || txtPrecio.getText().isBlank() || txtExistencia.getText().isBlank()
                 || cmbCategoria.getValue() == null) {
-            mensaje(Alert.AlertType.WARNING, "Complete los campos obligatorios.");
+            mensaje(Alert.AlertType.WARNING, "Complete todos los campos obligatorios.");
             return;
         }
 
@@ -79,14 +79,12 @@ public class ProductoController {
             BigDecimal precio = new BigDecimal(txtPrecio.getText().trim());
             int existencia = Integer.parseInt(txtExistencia.getText().trim());
 
-            // Caso 5: Precio menor/igual a cero o existencia negativa
             if (precio.compareTo(BigDecimal.ZERO) <= 0 || existencia < 0) {
                 mensaje(Alert.AlertType.WARNING, "El precio debe ser mayor que cero y la existencia no puede ser negativa.");
                 return;
             }
 
-            // Caso 7: Registro de datos válidos en TableView
-            productos.add(new Producto(
+            DatosManager.getInstance().getProductos().add(new Producto(
                     null,
                     txtCodigo.getText().trim(),
                     txtNombre.getText().trim(),
@@ -101,7 +99,6 @@ public class ProductoController {
             limpiar();
 
         } catch (NumberFormatException e) {
-            // Caso 4: Texto ingresado en precio o existencia
             mensaje(Alert.AlertType.ERROR, "Precio o existencia no válidos. Ingrese valores numéricos.");
         }
     }

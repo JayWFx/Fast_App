@@ -5,22 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="750.0"
+<BorderPane prefHeight="550.0" prefWidth="800.0"
+            style="-fx-background-color: #f4f6f9;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.fast_app.controller.MenuPrincipalController">
 
+    <!-- Top: Barra Superior Azul Marino -->
     <top>
-        <VBox BorderPane.alignment="CENTER">
+        <VBox style="-fx-background-color: #1b365d;" BorderPane.alignment="CENTER">
             <children>
-                <MenuBar>
+                <MenuBar style="-fx-background-color: #1b365d; -fx-padding: 4 10;">
                     <menus>
-                        <Menu text="Archivo">
+                        <Menu style="-fx-text-fill: white;" text="Archivo">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
                             </items>
                         </Menu>
-                        <Menu text="Formularios">
+                        <Menu style="-fx-text-fill: white;" text="Formularios">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#abrirFacturacion" text="Facturación" />
                                 <MenuItem mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
@@ -31,55 +33,104 @@
                     </menus>
                 </MenuBar>
 
-                <ToolBar>
+                <!-- ToolBar Azul Marino con Botones Circulares Blancos con Emojis y Tooltips -->
+                <ToolBar style="-fx-background-color: #162a49; -fx-padding: 8 18; -fx-border-color: #0f1d33; -fx-border-width: 1 0 1 0;">
                     <items>
-                        <Button onAction="#abrirFacturacion" text="Facturación" />
-                        <Button onAction="#abrirProductos" text="Productos" />
-                        <Button onAction="#abrirCategorias" text="Categorías" />
-                        <Button onAction="#abrirEmpleados" text="Empleados" />
+                        <!-- Facturación -->
+                        <Button text="🧾" onAction="#abrirFacturacion"
+                                style="-fx-background-color: #ffffff; -fx-background-radius: 20; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38; -fx-font-size: 18px; -fx-cursor: hand; -fx-padding: 0;">
+                            <tooltip>
+                                <Tooltip text="Facturación" />
+                            </tooltip>
+                        </Button>
+
+                        <!-- Productos -->
+                        <Button text="📦" onAction="#abrirProductos"
+                                style="-fx-background-color: #ffffff; -fx-background-radius: 20; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38; -fx-font-size: 18px; -fx-cursor: hand; -fx-padding: 0;">
+                            <tooltip>
+                                <Tooltip text="Productos" />
+                            </tooltip>
+                        </Button>
+
+                        <!-- Categorías -->
+                        <Button text="🏷️" onAction="#abrirCategorias"
+                                style="-fx-background-color: #ffffff; -fx-background-radius: 20; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38; -fx-font-size: 18px; -fx-cursor: hand; -fx-padding: 0;">
+                            <tooltip>
+                                <Tooltip text="Categorías" />
+                            </tooltip>
+                        </Button>
+
+                        <!-- Empleados -->
+                        <Button text="👤" onAction="#abrirEmpleados"
+                                style="-fx-background-color: #ffffff; -fx-background-radius: 20; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38; -fx-font-size: 18px; -fx-cursor: hand; -fx-padding: 0;">
+                            <tooltip>
+                                <Tooltip text="Empleados" />
+                            </tooltip>
+                        </Button>
+
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button onAction="#salir" text="Salir" />
+
+                        <!-- Salir -->
+                        <Button text="🚪" onAction="#salir"
+                                style="-fx-background-color: #fee2e2; -fx-background-radius: 20; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38; -fx-font-size: 18px; -fx-cursor: hand; -fx-padding: 0;">
+                            <tooltip>
+                                <Tooltip text="Salir" />
+                            </tooltip>
+                        </Button>
                     </items>
                 </ToolBar>
             </children>
         </VBox>
     </top>
 
+    <!-- Center: Panel Principal Elegante y Limpio -->
     <center>
         <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
             <children>
-                <Label text="Sistema de Facturación">
-                    <font>
-                        <Font size="26.0" />
-                    </font>
-                </Label>
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label text="Sistema de Facturación" style="-fx-text-fill: #1b365d;">
+                            <font>
+                                <Font name="System Bold" size="26.0" />
+                            </font>
+                        </Label>
+                        <Label text="Seleccione un módulo para iniciar" style="-fx-text-fill: #6c757d;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
 
-                <GridPane hgap="20.0" vgap="20.0" maxWidth="500.0">
+                <GridPane hgap="25.0" vgap="25.0" maxWidth="520.0">
                     <columnConstraints>
                         <ColumnConstraints percentWidth="50.0" />
                         <ColumnConstraints percentWidth="50.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="70.0" />
-                        <RowConstraints minHeight="70.0" />
+                        <RowConstraints minHeight="90.0" />
+                        <RowConstraints minHeight="90.0" />
                     </rowConstraints>
 
                     <children>
-                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirFacturacion" text="Facturación" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <font><Font size="16.0" /></font>
-                        </Button>
-                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirProductos" text="Productos" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <font><Font size="16.0" /></font>
-                        </Button>
-                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirCategorias" text="Categorías" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                            <font><Font size="16.0" /></font>
-                        </Button>
-                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirEmpleados" text="Empleados" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <font><Font size="16.0" /></font>
-                        </Button>
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirFacturacion" text="Facturación"
+                                style="-fx-background-color: #ffffff; -fx-border-color: #1b365d; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #1b365d; -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;"
+                                GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirProductos" text="Productos"
+                                style="-fx-background-color: #ffffff; -fx-border-color: #1b365d; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #1b365d; -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;"
+                                GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirCategorias" text="Categorías"
+                                style="-fx-background-color: #ffffff; -fx-border-color: #1b365d; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #1b365d; -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;"
+                                GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirEmpleados" text="Empleados"
+                                style="-fx-background-color: #ffffff; -fx-border-color: #1b365d; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #1b365d; -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;"
+                                GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
             </children>
