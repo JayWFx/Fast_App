@@ -45,11 +45,7 @@ public class ProductoController {
         colActivo.setCellValueFactory(new PropertyValueFactory<>("activo"));
 
         // Carga de categorías en el ComboBox
-        cmbCategoria.setItems(FXCollections.observableArrayList(
-                new Categoria(1, "Alimentos", true),
-                new Categoria(2, "Bebidas", true),
-                new Categoria(3, "Limpieza", true)
-        ));
+        cmbCategoria.setItems(FXCollections.observableArrayList());
 
         tblProductos.setItems(productos);
         chkActivo.setSelected(true);

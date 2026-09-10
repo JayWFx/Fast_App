@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0"
+<BorderPane prefHeight="500.0" prefWidth="750.0"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.fast_app.controller.MenuPrincipalController">
@@ -16,19 +17,28 @@
                     <menus>
                         <Menu text="Archivo">
                             <items>
-                                <MenuItem fx:id="mnuProductos" mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
-                                <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem fx:id="mnuSalir" mnemonicParsing="false" onAction="#salir" text="Salir" />
+                                <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+                            </items>
+                        </Menu>
+                        <Menu text="Formularios">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#abrirFacturacion" text="Facturación" />
+                                <MenuItem mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
+                                <MenuItem mnemonicParsing="false" onAction="#abrirCategorias" text="Categorías" />
+                                <MenuItem mnemonicParsing="false" onAction="#abrirEmpleados" text="Empleados" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
 
-                <!-- ToolBar -->
                 <ToolBar>
                     <items>
-                        <Button fx:id="btnProductos" mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
-                        <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#salir" text="Salir" />
+                        <Button onAction="#abrirFacturacion" text="Facturación" />
+                        <Button onAction="#abrirProductos" text="Productos" />
+                        <Button onAction="#abrirCategorias" text="Categorías" />
+                        <Button onAction="#abrirEmpleados" text="Empleados" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#salir" text="Salir" />
                     </items>
                 </ToolBar>
             </children>
@@ -36,11 +46,43 @@
     </top>
 
     <center>
-        <Label text="Sistema de facturación" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Label>
-    </center>
+        <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            </padding>
+            <children>
+                <Label text="Sistema de Facturación">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Label>
 
+                <GridPane hgap="20.0" vgap="20.0" maxWidth="500.0">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50.0" />
+                        <ColumnConstraints percentWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="70.0" />
+                        <RowConstraints minHeight="70.0" />
+                    </rowConstraints>
+
+                    <children>
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirFacturacion" text="Facturación" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font><Font size="16.0" /></font>
+                        </Button>
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirProductos" text="Productos" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font><Font size="16.0" /></font>
+                        </Button>
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirCategorias" text="Categorías" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <font><Font size="16.0" /></font>
+                        </Button>
+                        <Button maxWidth="Infinity" maxHeight="Infinity" onAction="#abrirEmpleados" text="Empleados" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font><Font size="16.0" /></font>
+                        </Button>
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>
