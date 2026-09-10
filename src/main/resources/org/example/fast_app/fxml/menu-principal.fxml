@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="500.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.fast_app.controller.MenuPrincipalController">
+
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu text="Archivo">
+                            <items>
+                                <MenuItem fx:id="mnuProductos" mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="mnuSalir" mnemonicParsing="false" onAction="#salir" text="Salir" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+
+                <!-- ToolBar -->
+                <ToolBar>
+                    <items>
+                        <Button fx:id="btnProductos" mnemonicParsing="false" onAction="#abrirProductos" text="Productos" />
+                        <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#salir" text="Salir" />
+                    </items>
+                </ToolBar>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <Label text="Sistema de facturación" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+    </center>
+
+</BorderPane>
